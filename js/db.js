@@ -10,9 +10,10 @@ db.enablePersistence()
 db.collection('doces').onSnapshot(snapshot => {
     snapshot.docChanges().forEach(change => {
         if (change.type === 'added') {
-            renderRecipe(change.doc.data(), change.doc.id);
+            desenhaCard(change.doc.data(), change.doc.id);
         }
         if (change.type === 'removed') {
+            removeCard(change.doc.id);
         }
     });
 });
@@ -22,13 +23,13 @@ const form = document.querySelector('form');
 form.addEventListener('submit', evt => {
     evt.preventDefault();
 
-    const doces = {
+    const doce = {
         nome: form.docesTitulo.value,
         descricao: form.docesDescricao.value,
-        endereco_imagem: form.docesArquivo.value
+        endereco_imagem: filePath
     };
 
-    db.collection('doces').add(doces)
+    db.collection('doces').add(doce)
         .catch(err => console.log(err));
 
     //reseta o formulario
@@ -37,3 +38,12 @@ form.addEventListener('submit', evt => {
     form.docesArquivo.value = '';
 
 });
+
+const doces1 = document.querySelector('.doces');
+doces1.addEventListener('click', evt => {
+  if(evt.target.tagName === 'I'){
+    const id = evt.target.getAttribute('data-id');
+    //console.log(id);
+    db.collection('doces').doc(id).delete();
+  }
+})
