@@ -1,4 +1,4 @@
-const doces = document.querySelector('.doces');
+const doces2 = document.querySelector('.doces');
    
 document.addEventListener('DOMContentLoaded', function() {
     var elems = document.querySelectorAll('.sidenav');
@@ -14,11 +14,11 @@ document.addEventListener('DOMContentLoaded', function() {
 const desenhaCard = (data, id) => {
 
     const html = `
-  <div class="col s12 m6 l3 doces" data-id="${id}">
+  <div class="col s12 m6 l3 doce" data-id="${id}">
 	    <div class="card" style="background-color: #A59C94FF;">
 		    <div class="card-image doces-imagem">
-	            <img src="images/${data.endereco_imagem}">
-	            <span class="card-title doces-titulo">"${data.nome}"</span>
+	            <img src="${data.endereco_imagem}">
+		<span class="card-title doces-titulo">"${data.nome}"</span>
 	        </div>
 	        <div class="card-content doces-descricao">
 	            <p>"${data.descricao}"</p>
@@ -28,7 +28,12 @@ const desenhaCard = (data, id) => {
             </div>
 	    </div>
    </div>`;
-    doces.innerHTML += html;
+    doces2.innerHTML += html;
 
 };
  
+// remove recipe
+const removeCard = (id) => {
+  const doce = document.querySelector(`.doce[data-id=${id}]`);
+  doce.remove();
+};
