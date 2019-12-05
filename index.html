@@ -196,6 +196,7 @@
                 function() {
                     uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
                         console.log('File available at', downloadURL);
+                        filePath = downloadURL;
                     });
                 });
         });
